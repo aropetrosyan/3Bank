@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - HellBANK</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+        h1 {
+            text-align: center;
+            color: #ff0000;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #444;
+            border-radius: 8px;
+            background-color: #222;
+            color: #fff;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #ff0000;
+            outline: none;
+        }
+        .password-group {
+            display: flex;
+            align-items: center;
+        }
+        .eye-icon {
+            cursor: pointer;
+            margin-left: -35px;
+            color: #ff0000;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+        .register-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .register-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Регистрация</h1>
+        
+        <!-- Почта -->
+        <div class="input-group">
+            <label for="email">Электронная почта:</label>
+            <input type="email" id="email" placeholder="Введите вашу почту" required>
+        </div>
+
+        <!-- Пароль -->
+        <div class="input-group password-group">
+            <label for="password">Пароль (минимум 8 символов):</label>
+            <input type="password" id="password" placeholder="Введите пароль" required>
+            <span class="eye-icon" onclick="togglePasswordVisibility()">👁️</span>
+        </div>
+
+        <!-- Подтверждение пароля -->
+        <div class="input-group">
+            <label for="confirm-password">Подтвердите пароль:</label>
+            <input type="password" id="confirm-password" placeholder="Введите пароль снова" required>
+            <p id="password-error" class="error-message">Пароли не совпадают</p>
+        </div>
+
+        <!-- Имя и фамилия персонажа -->
+        <div class="input-group">
+            <label for="name">Имя и фамилия персонажа:</label>
+            <input type="text" id="name" placeholder="Введите имя и фамилию персонажа" required>
+        </div>
+
+        <!-- Кнопка регистрации -->
+        <button class="register-button" onclick="register()">Зарегистрироваться</button>
+    </div>
+
+    <script>
+        let isPasswordVisible = false;
+
+        // Функция для переключения видимости пароля
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById("password");
+            const confirmPasswordField = document.getElementById("confirm-password");
+            const eyeIcon = document.querySelector(".eye-icon");
+            
+            if (isPasswordVisible) {
+                passwordField.type = "password";
+                confirmPasswordField.type = "password";
+                eyeIcon.textContent = "👁️";  // Иконка глаза
+            } else {
+                passwordField.type = "text";
+                confirmPasswordField.type = "text";
+                eyeIcon.textContent = "❌";  // Иконка с крестом
+            }
+
+            isPasswordVisible = !isPasswordVisible;
+        }
+
+        // Функция для регистрации
+        function register() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const passwordError = document.getElementById("password-error");
+
+            // Проверка на совпадение паролей
+            if (password !== confirmPassword) {
+                passwordError.style.display = "block";
+                return;
+            }
+
+            // Если пароли совпадают, скрываем сообщение об ошибке
+            passwordError.style.display = "none";
+
+            // Здесь вы можете добавить код для отправки данных на сервер
+            // Например:
+            // console.log(email, password, name);
+            alert("Регистрация успешна!");
+        }
+    </script>
+
+</body>
+</html>
